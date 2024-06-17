@@ -5,6 +5,10 @@
 
 #include "tensor.hpp"
 
+#ifndef M_PI
+#define M_PI 3.1415926535897932384626433832795028841971693993751058209749445923078164
+#endif
+
 namespace {
 
 struct PolarCoordinate {
@@ -72,9 +76,11 @@ inline double normalize_angle(double angle) {
     return angle;
 }
 
+#if defined(__GCC__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wnarrowing"
 #pragma GCC diagnostic ignored "-Wsign-compare"
+#endif
 
 template <typename T>
 void transform_threaded(ThreadData<T>& thread_data) {
@@ -101,7 +107,10 @@ void transform_threaded(ThreadData<T>& thread_data) {
     }
 }
 
+#if defined(__GCC__)
 #pragma GCC diagnostic pop
+#endif
+
 }  // namespace
 
 inline std::tuple<unsigned, unsigned> radon::sinogram_size(unsigned rows,

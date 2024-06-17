@@ -5,6 +5,7 @@
 #include <limits>
 #include <opencv2/opencv.hpp>
 #include <string>
+#include <getopt.h>
 
 #include "radon/radon.hpp"
 
@@ -22,7 +23,7 @@ static T cv_max(const cv::Mat img) {
     return val;
 }
 
-void print_help(char *progname) {
+static void print_help(const char *progname) {
     printf("Usage: %s [-t num_threads] input_file output_file\n", progname);
     printf(
         "This program reads an input image in grey scale and evaluates the radon transform. The "
@@ -32,7 +33,7 @@ void print_help(char *progname) {
     printf("  -h, --help      Display this help message\n");
 }
 
-int main(int argc, char **argv) {
+int main(int argc, const char **argv) {
     static constexpr uint64_t DEFAULT_N_THREADS = 1;
 
     int opt;

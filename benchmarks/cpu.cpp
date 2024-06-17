@@ -24,7 +24,7 @@ void benchmark_phantom(benchmark::State& state) {
     }
 }
 
-int main(int argc, char** argv) {
+int main(int argc, const char** argv) {
     assert(argc == 2);
     const std::string phantom_filename = argv[1];
 

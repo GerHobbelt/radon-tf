@@ -5,7 +5,13 @@
 #include <numeric>
 #include <vector>
 
-#define ALWAYS_INLINE __attribute__((always_inline))
+#ifndef ALWAYS_INLINE
+#ifdef _MSC_VER
+#define ALWAYS_INLINE /* static */ __forceinline /* inline */
+#else
+#define ALWAYS_INLINE __attribute__((always_inline)) /* static */ inline
+#endif
+#endif
 
 // This function is always inlined because we want to avoid having to recompute the accumulator
 // values. Also, if the indices are the same, this whole thing will get optimized out from CSE.
